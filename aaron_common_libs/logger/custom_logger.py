@@ -6,10 +6,7 @@
 from json import dumps as json_dumps
 from logging import getLogger
 from logging.config import dictConfig
-from os import environ as os_environ
 from pathlib import Path
-
-from azure.storage.blob import BlobServiceClient
 
 
 class CustomLogger:  # pylint: disable=too-few-public-methods
@@ -68,31 +65,8 @@ class CustomLogger:  # pylint: disable=too-few-public-methods
             "disable_existing_loggers": False,
         }
 
-        if (
-            os_environ.get("LOG_AZURE", None)
-            and log_dict["storage_account_name"]
-            and log_dict["storage_connection_string"]
-            and log_dict["storage_container_name"]
-        ):
-            log_container_client = BlobServiceClient.from_connection_string(
-                conn_str=log_dict["storage_connection_string"]
-            ).get_container_client(log_dict["storage_container_name"])
-            # Add new azure logging handler to config
-            logging_config["handlers"]["azure"] = {
-                "level": "INFO",
-                "class": "aaron_common_libs.logger.azure_logger.AzureBlobStorageHandler",
-                "container_client": log_container_client,
-                "log_filename": log_dict["filename"],
-                "formatter": "default",
-            }
-            # Add new azure config to existing handlers
-            logging_config["loggers"]["all"]["handlers"] = ["azure", "console", "file"]
-            logging_config["loggers"]["default"]["handlers"] = ["azure", "console", "file"]
-            self.all = self.configure_logger(name="all", log_config=logging_config, log_dict=log_dict)
-            self.default = self.configure_logger(name="azure", log_config=logging_config, log_dict=log_dict)
-        else:
-            self.all = self.configure_logger(name="all", log_config=logging_config, log_dict=log_dict)
-            self.default = self.configure_logger(name="default", log_config=logging_config, log_dict=log_dict)
+        self.all = self.configure_logger(name="all", log_config=logging_config, log_dict=log_dict)
+        self.default = self.configure_logger(name="default", log_config=logging_config, log_dict=log_dict)
 
     def configure_logger(self, name, log_config, log_dict):
         """Configure multiple logging destinations.
