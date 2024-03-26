@@ -10,10 +10,8 @@ from logging import getLogger
 from os.path import exists
 from textwrap import dedent
 
-from slack_sdk import WebClient, WebhookClient
-from tablib import Dataset
-
 from config import Config
+from tablib import Dataset
 
 logger = getLogger("default")
 
@@ -82,51 +80,6 @@ def pretty_print(this_dict):
     json_dumps: dict
     """
     return json_dumps(this_dict, indent=4)
-
-
-def send_slack_msg(this_message, channel_id=None, message_type="mrkdwn", webhook_url=None):
-    """Send a message to a Slack channel.
-
-    channel_id is to be used with Slack Bots; webhook_url for Webhooks
-
-    Args
-    ----
-    channel_id: str
-    message_type: str
-    this_message: str
-    webhook_url: str
-
-    Returns
-    -------
-    None
-    """
-    logger.info("Sending Slack message...")
-    response = ""
-    if channel_id and not webhook_url:
-        try:
-            client = WebClient(token=config.log_dict["slack_token"])
-            response = client.chat_postMessage(
-                channel=channel_id,
-                text=this_message,
-                blocks=[
-                    {
-                        "type": "section",
-                        "text": {
-                            "type": message_type,
-                            "text": this_message,
-                        },
-                    }
-                ],
-            )
-        except Exception as some_exception:  # pylint: disable=broad-except
-            logger.error("ERROR==%s", some_exception)
-    if webhook_url and not channel_id:
-        try:
-            client = WebhookClient(webhook_url)
-            response = client.send(text=this_message)
-        except Exception as some_exception:  # pylint: disable=broad-except
-            logger.error("ERROR==%s", some_exception)
-    logger.debug("response==%s", response)
 
 
 def write_to_csv(csv_filename, csv_headers, this_json):

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aaron_common_libs"
-version = "0.1.2"
+version = "0.2.0"
 description = "A collect of Python classes commonly used by my scripts."
 authors = ["Aaron Melton <aaron@aaronmelton.com>"]
 readme = "README.md"
@@ -32,7 +32,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.bandit]
-skips = []
+skips = ["B101"]
 exclude_dirs = ["./tests/"]
 
 [tool.black]
@@ -63,7 +63,7 @@ match = '''(?!__init__).*\.py'''
 match-dir = '''(?!tests)[^\.].*'''
 
 [tool.pylint.master]
-init-hook = 'import os, sys; sys.path.append(os.path.dirname("aaron_common_libs"));'
+init-hook = 'import os, sys; sys.path.append(os.path.dirname("aaron_common_libs/"));'
 
 [tool.pylint.messages_control]
 disable = '''
@@ -83,6 +83,6 @@ min-similarity-lines = 10
 # Required along with 'pylint: disable=duplicate-code' to ignore annoying messages.
 
 [tool.pytest.ini_options]
-pythonpath = [".", "aaron-common-libs"]
+pythonpath = [".", "aaron-common-libs/"]
 env = ["LOG_LEVEL = DEBUG",
        "LOG_PATH = /tmp/",]
