@@ -1,4 +1,5 @@
 """Aaron's Custom Logging Class."""
+
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 #

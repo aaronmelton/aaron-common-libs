@@ -1,6 +1,11 @@
 # CHANGELOG
 
 
+## [0.2.1] - 2024-05-20
+### Changed
+- Bumping package versions.
+
+
 ## [0.2.0] - 2024-03-26
 ### Changed
 - common_funcs.py: Removed send_slack_msg(); Will move this to its own module.
