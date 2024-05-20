@@ -1,4 +1,5 @@
 """Custom Class for sending log messages to Azure Blob Storage."""
+
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
