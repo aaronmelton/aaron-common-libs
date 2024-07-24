@@ -1,4 +1,5 @@
 """Custom Class for sending log messages to Azure Blob Storage."""
+
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
@@ -33,4 +34,5 @@ class AzureBlobStorageHandler(Handler):
         It receives a record, formats it and sends it to the url.
         """
         log_data = self.format(record).encode("utf-8")
-        self.blob_client.append_block(f"{log_data}\n")
+        # self.blob_client.append_block(f"{log_data}\n")
+        self.blob_client.append_block(log_data + b"\n")

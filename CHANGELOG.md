@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## [0.3.0] - 2024-07-24
+### Added
+- test_azure_logger.py, test_custom_logger.py: Adding unit testing to existing
+  logger modules.
+### Changed
+- Bumping Python packages versions.
+- Converted docstrings to Google docstring format.
+
+
 ## [0.2.0] - 2024-03-26
 ### Changed
 - common_funcs.py: Removed send_slack_msg(); Will move this to its own module.
