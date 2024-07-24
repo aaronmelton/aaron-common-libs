@@ -1,6 +1,7 @@
 # CHANGELOG
 
 
+<<<<<<< HEAD
 ## [0.3.0] - 2024-07-24
 ### Added
 - test_azure_logger.py, test_custom_logger.py: Adding unit testing to existing
@@ -8,6 +9,11 @@
 ### Changed
 - Bumping Python packages versions.
 - Converted docstrings to Google docstring format.
+=======
+## [0.2.1] - 2024-05-20
+### Changed
+- Bumping package versions.
+>>>>>>> origin/master
 
 
 ## [0.2.0] - 2024-03-26
