@@ -16,13 +16,11 @@ class CustomLogger:  # pylint: disable=too-few-public-methods
     def __init__(self, log_dict=None):
         """Initialize this class.
 
-        Args
-        ----
-        log_dict: dict
+        Args:
+            log_dict (dict): Logging configuration dictionary.
 
-        Returns
-        -------
-        Object of Class
+        Returns:
+            Object of Class
         """
         logging_config = {
             "version": 1,
@@ -72,15 +70,13 @@ class CustomLogger:  # pylint: disable=too-few-public-methods
     def configure_logger(self, name, log_config, log_dict):
         """Configure multiple logging destinations.
 
-        Args
-        ----
-        name: str
-        log_config: dict
-        log_dict: dict
+        Args:
+            name (str): Name of the logging handler (all, default, etc).
+            log_config (dict): Custom logging handler configuration.
+            log_dict (dict): Logging configuration dictionary.
 
-        Returns
-        -------
-        log handler
+        Returns:
+            log handler
         """
         Path(log_dict["path"]).mkdir(parents=True, exist_ok=True)
         dictConfig(config=log_config)

@@ -4,7 +4,6 @@
 # -*- coding: utf-8 -*-
 #
 
-import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from json import dumps as json_dumps
 from logging import getLogger
@@ -20,65 +19,56 @@ config = Config()
 
 
 def ask(question, default="no"):
-    """Ask a yes/no question via raw_input() and return their answer.
+    """Ask a yes/no question via input() and return the answer.
 
-    "question" is a string that is presented to the user.
-    "default" is the presumed answer if the user just hits <Enter>.
-            It must be "yes" (the default), "no" or None (meaning
-            an answer is required of the user).
+    Args:
+        question (str): The question to present to the user.
+        default (str, optional): The presumed answer if the user just hits <Enter>.
+                                 It must be "yes", "no", or None (meaning an answer
+                                 is required from the user). Defaults to "no".
 
-    The "answer" return value is True for "yes" or False for "no".
+    Returns:
+        bool: True for "yes" or False for "no".
     """
     valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
-    if default is None:
-        prompt = " [y/n] "
-    elif default == "yes":
-        prompt = " [Y/n] "
-    elif default == "no":
-        prompt = " [y/N] "
-    else:
+    prompts = {None: " [y/n] ", "yes": " [Y/n] ", "no": " [y/N] "}
+
+    if default not in prompts:
         raise ValueError(f"invalid default answer: '{default}'")
 
+    prompt = prompts[default]
+
     while True:
-        sys.stdout.write(question + prompt)
-        choice = input().lower()
-        if default is not None and choice == "":  # pylint: disable=no-else-return
-            return valid[default]
-        elif choice in valid:
+        choice = input(question + prompt).lower()
+        if choice in valid:
             return valid[choice]
-        else:
-            sys.stdout.write("""Please respond with 'yes' or 'no' " "(or 'y' or 'n').\n""")
+        if choice == "" and default is not None:
+            return valid[default]
+        print("Please respond with 'yes' or 'no' (or 'y' or 'n').")
 
 
 def find_diff_in_lists(first_list=None, second_list=None):
     """Find the difference between two lists.
 
-    Args
-    ----
-    first_list: list
-    second_list: list
+    Args:
+        first_list (list): The first list.
+        second_list (list): The second list.
 
-    Returns
-    -------
-    diff_list: list
+    Returns:
+        diff_list (list): A list of differences between first_list and second_list.
     """
-    # logger.debug("first_list==%s", first_list)
-    # logger.debug("second_list==%s", second_list)
     diff_list = [item for item in first_list if item not in second_list]
-    # logger.debug("diff_list==%s", diff_list)
     return diff_list
 
 
 def pretty_print(this_dict):
     """Return a nicely-formatted JSON string.
 
-    Args
-    ----
-    this_dict: dict
+    Args:
+        this_dict (dict): The dictionary to be converted to a pretty-printed JSON string.
 
-    Returns
-    -------
-    json_dumps: dict
+    Returns:
+        str: A JSON-formatted string with indentation for readability.
     """
     return json_dumps(this_dict, indent=4)
 
@@ -86,15 +76,13 @@ def pretty_print(this_dict):
 def write_to_csv(csv_filename, csv_headers, this_json):
     """Write JSON to CSV.
 
-    Args
-    ----
-    csv_filename: str
-    csv_headers: list
-    this_json: dict
+    Args:
+        csv_filename (str): The name of the CSV file.
+        csv_headers (list): A list containing the names of the headers in the CSV file.
+        this_json (dict): The dictionary to be written to CSV file.
 
-    Returns
-    -------
-    write_success: bool
+    Returns:
+        write_success (bool): True if the CSV file was written successfully.
     """
     logger.debug("csv_filename==%s", csv_filename)
     logger.debug("csv_headers==%s", csv_headers)
@@ -142,7 +130,6 @@ def argument(*name_or_flags, **kwargs):
     return list(name_or_flags), kwargs
 
 
-# pylint: disable=dangerous-default-value
 def subcommand(args=None, parent=subparsers):
     """Decorator to define a new subcommand in a sanity-preserving way.
 
