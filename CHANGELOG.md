@@ -1,6 +1,12 @@
 # CHANGELOG
 
 
+## [0.3.2] - 2024-09-16
+### Changed
+- pyproject.toml: Setting python=3.11 so I can run this on an ancient Raspberry Pi.
+- Bumping Python packages versions.
+
+
 ## [0.3.1] - 2024-07-24
 ### Fixed
 - pyproject.toml: git merged message jacked up the Poetry files.
