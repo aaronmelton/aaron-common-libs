@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## [0.3.3] - 2024-09-24
+### Changed
+- pretty_print(): Modified this function to handle Class objects with
+  non-seralized data.  This should be backwards compatible with the old
+  function.  If not, I guess there will be another commit coming your way...
+
+
 ## [0.3.2] - 2024-09-16
 ### Changed
 - pyproject.toml: Setting python=3.11 so I can run this on an ancient Raspberry Pi.

@@ -61,16 +61,25 @@ def find_diff_in_lists(first_list=None, second_list=None):
     return diff_list
 
 
-def pretty_print(this_dict):
-    """Return a nicely-formatted JSON string.
+def pretty_print(this_obj):
+    """Return a nicely-formatted JSON string, with support for class objects.
 
     Args:
-        this_dict (dict): The dictionary to be converted to a pretty-printed JSON string.
+        this_obj (any): The object (dict, list, or class instance) to be converted to a pretty-printed JSON string.
 
     Returns:
         str: A JSON-formatted string with indentation for readability.
     """
-    return json_dumps(this_dict, indent=4)
+
+    def class_to_dict(obj):
+        """Custom serializer function to handle class objects."""
+        # If the object has a `to_dict()` method, use it to convert to a dictionary
+        if hasattr(obj, "to_dict"):
+            return obj.to_dict()
+        # Otherwise, raise a TypeError to let JSON know it's not serializable
+        raise TypeError(f"Object of type {obj.__class__.__name__} is not JSON serializable")
+
+    return json_dumps(this_obj, indent=4, default=class_to_dict)
 
 
 def write_to_csv(csv_filename, csv_headers, this_json):
