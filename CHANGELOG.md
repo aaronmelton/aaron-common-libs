@@ -1,6 +1,11 @@
 # CHANGELOG
 
 
+## [0.3.4] - 2024-10-16
+### Added
+- pad_string() to pad strings.
+
+
 ## [0.3.3] - 2024-09-24
 ### Changed
 - pretty_print(): Modified this function to handle Class objects with

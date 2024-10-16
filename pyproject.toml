@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aaron_common_libs"
-version = "0.3.3"
+version = "0.3.4"
 description = "A collect of Python classes commonly used by my scripts."
 authors = ["Aaron Melton <aaron@aaronmelton.com>"]
 readme = "README.md"
