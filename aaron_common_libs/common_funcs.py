@@ -61,6 +61,23 @@ def find_diff_in_lists(first_list=None, second_list=None):
     return diff_list
 
 
+def pad_string(string, length):
+    """Add whitespace to a string to achieve desired string length.
+
+    Args:
+        string (str): The string to pad.
+        length (int): The desired string length.
+
+    Returns:
+        padded_string (str): Padded string.
+    """
+    if len(string) < length:
+        padded_string = string.ljust(length)
+    else:
+        padded_string = string[:length]
+    return padded_string
+
+
 def pretty_print(this_obj):
     """Return a nicely-formatted JSON string, with support for class objects.
 
