@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## [0.4.0] - 2024-11-21
+### Added
+- slack/slack_messenger.py: Added Slack functionality.
+### Removed
+- pyproject.toml: Removed slack-sdk; No longer necessary.
+
+
 ## [0.3.4] - 2024-10-16
 ### Added
 - pad_string() to pad strings.
