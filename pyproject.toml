@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aaron_common_libs"
-version = "0.3.4"
+version = "0.4.0"
 description = "A collect of Python classes commonly used by my scripts."
 authors = ["Aaron Melton <aaron@aaronmelton.com>"]
 readme = "README.md"
@@ -11,7 +11,6 @@ packages = [{include = "aaron_common_libs"}]
 [tool.poetry.dependencies]
 azure-storage-blob = "^12.22.0"
 python = "^3.11"
-slack-sdk = "^3.32.0"
 tablib = "^3.6.1"
 
 [tool.poetry.dev-dependencies]
