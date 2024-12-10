@@ -1,6 +1,12 @@
 # CHANGELOG
 
 
+## [0.5.0] - 2024-12-10
+### Removed
+- logger/azure_logger.py: No longer logging to Azure so I don't need this
+  function presently.
+
+
 ## [0.4.0] - 2024-11-21
 ### Added
 - slack/slack_messenger.py: Added Slack functionality.

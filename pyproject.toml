@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aaron_common_libs"
-version = "0.4.0"
+version = "0.5.0"
 description = "A collect of Python classes commonly used by my scripts."
 authors = ["Aaron Melton <aaron@aaronmelton.com>"]
 readme = "README.md"
@@ -9,12 +9,11 @@ repository = "https://github.com/aaronmelton/aaron-common-libs"
 packages = [{include = "aaron_common_libs"}]
 
 [tool.poetry.dependencies]
-azure-storage-blob = "^12.22.0"
-python = "^3.11"
+python = "^3.12"
 tablib = "^3.6.1"
 
 [tool.poetry.dev-dependencies]
-bandit = "^1.7.9"
+bandit = "^1.8.0"
 black = "^24.8.0"
 coverage = "^7.6.1"
 flake8 = "^7.1.1"
