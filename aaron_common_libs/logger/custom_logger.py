@@ -1,9 +1,5 @@
 """Aaron's Custom Logging Class."""
 
-# !/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-
 from json import dumps as json_dumps
 from logging import getLogger
 from logging.config import dictConfig
@@ -13,34 +9,43 @@ from pathlib import Path
 class CustomLogger:  # pylint: disable=too-few-public-methods
     """Class for custom logging destinations."""
 
-    def __init__(self, log_dict=None):
+    def __init__(self, log_dict: dict) -> None:
         """Initialize this class.
 
         Args:
-            log_dict (dict): Logging configuration dictionary.
-
-        Returns:
-            Object of Class
+            log_dict: Logging configuration dictionary containing:
+                filename (str): Path to log file
+                level (str): Logging level (e.g., "INFO", "DEBUG")
+                path (str): Directory path for log files
+                format (str, optional): Custom log format string
+                formatter (str, optional): Formatter type ("default" or "json")
         """
+        # Get format configuration from log_dict or use defaults
+        default_format = (
+            "{asctime}  Log Level: {levelname:8}  Line: {lineno:4}  Function: {funcName:29}  Msg: {message}"
+        )
+        json_format = json_dumps(
+            {
+                "time": "%(asctime)s",
+                "level": "%(levelname)s",
+                "name": "%(name)s",
+                "line": "%(lineno)s",
+                "function": "%(funcName)s",
+                "message": "%(message)s",
+            }
+        )
+
+        # Determine which formatter to use
+        formatter_type = log_dict.get("formatter", "default")
+        log_format = log_dict.get("format", json_format if formatter_type == "json" else default_format)
+
         logging_config = {
             "version": 1,
             "formatters": {
                 "default": {
-                    "format": "{asctime}  Log Level: {levelname:8}  Line: {lineno:4}  Function: {funcName:29}  Msg: {"
-                    "message}",
-                    "style": "{",
+                    "format": log_format,
+                    "style": "{" if "{" in log_format else "%",
                     "datefmt": "%Y-%m-%dT%H:%M:%S",
-                },
-                "json": {
-                    "format": json_dumps(
-                        {
-                            "time": "%(asctime)s",
-                            "log_level": "%(levelname)s",
-                            "line": "%(lineno)s",
-                            "function": "%(funcName)s",
-                            "message": "%(message)s",
-                        }
-                    )
                 },
             },
             "handlers": {
@@ -58,8 +63,21 @@ class CustomLogger:  # pylint: disable=too-few-public-methods
                 },
             },
             "loggers": {
-                "all": {"level": log_dict["level"], "handlers": ["console", "file"]},
-                "default": {"level": log_dict["level"], "handlers": ["console", "file"]},
+                "": {  # Root logger
+                    "level": log_dict["level"],
+                    "handlers": ["console", "file"],
+                    "propagate": True,
+                },
+                "all": {
+                    "level": log_dict["level"],
+                    "handlers": ["console", "file"],
+                    "propagate": False,
+                },
+                "default": {
+                    "level": log_dict["level"],
+                    "handlers": ["console", "file"],
+                    "propagate": False,
+                },
             },
             "disable_existing_loggers": False,
         }
@@ -67,16 +85,16 @@ class CustomLogger:  # pylint: disable=too-few-public-methods
         self.all = self.configure_logger(name="all", log_config=logging_config, log_dict=log_dict)
         self.default = self.configure_logger(name="default", log_config=logging_config, log_dict=log_dict)
 
-    def configure_logger(self, name, log_config, log_dict):
+    def configure_logger(self, name: str, log_config: dict, log_dict: dict) -> getLogger:
         """Configure multiple logging destinations.
 
         Args:
-            name (str): Name of the logging handler (all, default, etc).
-            log_config (dict): Custom logging handler configuration.
-            log_dict (dict): Logging configuration dictionary.
+            name: Name of the logging handler (all, default, etc).
+            log_config: Custom logging handler configuration.
+            log_dict: Logging configuration dictionary.
 
         Returns:
-            log handler
+            Configured logger instance
         """
         Path(log_dict["path"]).mkdir(parents=True, exist_ok=True)
         dictConfig(config=log_config)

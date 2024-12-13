@@ -4,16 +4,16 @@
 # -*- coding: utf-8 -*-
 #
 
+import logging
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from json import dumps as json_dumps
-from logging import getLogger
 from os.path import exists
 from textwrap import dedent
 
 from config import Config
 from tablib import Dataset
 
-logger = getLogger("default")
+logger = logging.getLogger(__name__)
 
 config = Config()
 
