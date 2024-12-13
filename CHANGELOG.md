@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## [0.6.0] - 2024-12-13
+### Fixed
+- aaron_common_libs/common_funcs.py, aaron_common_libs/logger/custom_logger.py,
+  aaron_common_libs/slack/slack_messenger.py: Modified to fix
+  'logger = logging.getLogger(__name__)' not working correctly.
+### Chanaged
+- tests/test_custom_logger.py: Modified to match changes to custom_logger.py
+
+
 ## [0.5.0] - 2024-12-10
 ### Removed
 - logger/azure_logger.py: No longer logging to Azure so I don't need this

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aaron_common_libs"
-version = "0.5.0"
+version = "0.6.0"
 description = "A collect of Python classes commonly used by my scripts."
 authors = ["Aaron Melton <aaron@aaronmelton.com>"]
 readme = "README.md"
@@ -11,6 +11,7 @@ packages = [{include = "aaron_common_libs"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 tablib = "^3.6.1"
+requests = "^2.32.3"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.8.0"

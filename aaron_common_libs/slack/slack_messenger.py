@@ -5,12 +5,12 @@
 #
 # ChatGPT Conversation: https://chatgpt.com/share/673f39a8-52c4-8009-ab7a-5d75884884ca
 
-from logging import getLogger
+import logging
 from typing import Dict, Optional
 
 import requests
 
-logger = getLogger("default")
+logger = logging.getLogger(__name__)
 
 
 class SlackMessenger:  # pylint: disable=too-few-public-methods
