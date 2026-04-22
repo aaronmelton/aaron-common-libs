@@ -139,14 +139,12 @@ def write_to_csv(csv_filename, csv_headers, this_json):
 
 cli = ArgumentParser(
     formatter_class=RawDescriptionHelpFormatter,
-    description=dedent(
-        f"""\
+    description=dedent(f"""\
         {config.app_dict["title"]} v{config.app_dict["version"]} ({config.app_dict["date"]})
         --
         Description: {config.app_dict["desc"]}
         Author:      {config.app_dict["author"]}
-        URL:         {config.app_dict["url"]}"""
-    ),
+        URL:         {config.app_dict["url"]}"""),
 )
 subparsers = cli.add_subparsers(dest="subcommand")
 
