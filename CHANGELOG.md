@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## [0.7.0] - 2026-04-22
+### Security
+- poetry.lock: Resolved GitHub Dependabot alerts by upgrading vulnerable
+  dependencies: black (>=26.3.1, arbitrary file writes via unsanitized cache
+  file name), pytest (>=9.0.3, vulnerable tmpdir handling), requests
+  (>=2.33.0, insecure temp file reuse and .netrc credential leak), urllib3
+  (>=2.6.3, decompression-bomb bypass and redirect handling), and Pygments
+  (>=2.20.0, ReDoS in GUID regex).
+### Changed
+- pyproject.toml: Bumped minimum versions for black (^26.3.1), pytest
+  (^9.0.3), and requests (^2.33.0) to allow the patched releases.
+- aaron_common_libs/common_funcs.py: Reformatted by black 26 (updated
+  multiline string handling in dedent() call).
+
+
 ## [0.6.0] - 2024-12-13
 ### Fixed
 - aaron_common_libs/common_funcs.py, aaron_common_libs/logger/custom_logger.py,

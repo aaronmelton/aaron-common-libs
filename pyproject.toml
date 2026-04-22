@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aaron_common_libs"
-version = "0.6.0"
+version = "0.7.0"
 description = "A collect of Python classes commonly used by my scripts."
 authors = ["Aaron Melton <aaron@aaronmelton.com>"]
 readme = "README.md"
@@ -11,17 +11,17 @@ packages = [{include = "aaron_common_libs"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 tablib = "^3.6.1"
-requests = "^2.32.3"
+requests = "^2.33.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.8.0"
-black = "^24.8.0"
+black = "^26.3.1"
 coverage = "^7.6.1"
 flake8 = "^7.1.1"
 isort = "^5.13.2"
 pydocstyle = "^6.3.0"
 pylint = "^3.2.7"
-pytest = "^8.3.3"
+pytest = "^9.0.3"
 pytest-env = "^1.1.4"
 toml = "^0.10.2"
 Flake8-pyproject = "^1.2.3"
